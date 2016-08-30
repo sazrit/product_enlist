@@ -1,11 +1,10 @@
 @extends('layouts.app')
 @section('page_title')
-add new products
+	Add New Product
 @endsection
 
 @section('content')
 
-<div class="container">
 	@if(Session::has('success'))
 	    <section class="info-box success">
 	    {{ Session::get('success') }}
@@ -30,14 +29,12 @@ add new products
 	    	<select name="category" id="category">
 				<option value="-1">Please Select</option>
 				@foreach($categories as $category)
-				<option value="{{ $category->id }}">{{ $category->name }}</option>
+				<option value="{{ $category->id }}">{{ $category->category_name }}</option>
 				@endforeach
 			</select>
 	    </div>
 	    <button type="submit" class="btn"> Submit </button>
 	    <input type="hidden" name="_token" value="{{ Session::token() }}">
 	</form>
-
-</div>
 
 @endsection

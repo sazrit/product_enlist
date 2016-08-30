@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('page_title')
-view products
+	View Products
 @endsection
 
 @section('content')
 
-@foreach($products as $product)
-				<option value="{{ $product->id }}">{{ $product->name }}</option>
-				@endforeach
+	@foreach($products as $product)
+		<p> ID: {{ $product->id }}, Name: {{ $product->name }} </p>
+	@endforeach
 
 @endsection

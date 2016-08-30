@@ -2,6 +2,36 @@
 
 namespace App;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+class User extends Model implements Authenticatable
+{
+    use  \Illuminate\Auth\Authenticatable;
+
+    public function UserInformation()
+    {
+        return $this->hasOne('App\UserInformation');
+    }
+
+    public function Product()
+    {
+        return $this->hasMany('App\Product', 'user_id');
+    }
+
+
+    public function userType()
+    {
+        return $this->belongsTo('App\userType');
+    }
+}
+
+
+
+
+/*****<?php
+
+namespace App;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -11,8 +41,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
+  /*****  protected $fillable = [
+        'name','first_name', 'email', 'password',
     ];
 
     /**
@@ -20,7 +50,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+  /*****  protected $hidden = [
         'password', 'remember_token',
     ];
 

@@ -11,43 +11,79 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/home', function () {
     return view('index');
-});
+})->name('home');*/
 
 
-Route::auth();
+//Route::auth();
 
 //Route::get('/home', 'HomeController@index');
 
 
 
-Route::get('/home',[
-         'uses' => 'HomeController@index',
-         'as' => 'login_register'
+Route::get('/',[
+         'uses' => 'CommonController@index',
+         'as' => 'home'
 ]);
 
-Route::get('/product/category/new',[
-         'uses' => 'HomeController@addNewProductCategory',
+Route::get('/signIn',[
+         'uses' => 'CommonController@signIn',
+         'as' => 'signIn'
+]);
+
+Route::get('/product/view',[
+         'uses' => 'ViewproductController@viewProducts',
+         'as' => 'view.products'
+]);
+
+Route::post('/signup',[
+   'uses' => 'CommonController@postSignUp',
+   'as' => 'signup'
+   ]);
+
+Route::post('/signin',[
+   'uses' => 'CommonController@postSignIn',
+   'as' => 'signin'
+   ]);
+
+Route::post('/search',[
+   'uses' => 'SearchController@postSearch',
+   'as' => 'search'
+   ]);
+
+
+Route::group(['middleware'=>['auth']], function(){
+
+    Route::get('/signOut',[
+         'uses' => 'CommonController@signOut',
+         'as' => 'signOut'
+]);
+
+   Route::get('/dashboard',[
+   'uses' => 'CommonController@getDashboard',
+   'as' => 'dashboard',
+   'middleware' => 'auth'
+   ]);
+
+   Route::get('/product/category/new',[
+         'uses' => 'CategoryController@addNewProductCategory',
          'as' => 'add.new.productCategory'
 ]);
 
 Route::post('/product/category/new',[
-         'uses' => 'HomeController@doAddNewProductCategory',
+         'uses' => 'CategoryController@doAddNewProductCategory',
          'as' => 'add.new.productCategory'
 ]);
 
 Route::get('/product/new',[
-         'uses' => 'HomeController@addNewProduct',
+         'uses' => 'ProductController@addNewProduct',
          'as' => 'add.new.product'
 ]);
 
 Route::post('/product/new',[
-         'uses' => 'HomeController@doAddNewProduct',
+         'uses' => 'ProductController@doAddNewProduct',
          'as' => 'add.new.product'
 ]);
 
-Route::get('/product/view',[
-         'uses' => 'HomeController@viewProducts',
-         'as' => 'view.products'
-]);
+});

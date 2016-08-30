@@ -1,11 +1,10 @@
 @extends('layouts.app')
 @section('page_title')
-add new products
+	Add New Product Category
 @endsection
 
 @section('content')
 
-<div class="container">
 	@if(Session::has('success'))
 	    <section class="info-box success">
 	    {{ Session::get('success') }}
@@ -23,7 +22,7 @@ add new products
 	<form class="form-horizontal" role="form" method="POST" action="{{ route('add.new.productCategory') }}">
 		<div>
 	        <label for="name">Product Category Name</label>
-	        <input type="string" name="name" id="name" placeholder="Name"/>  
+	        <input type="string" name="category_name" id="category_name" placeholder="category name"/>  
 	    </div>
 	    <div>
 	        <label for="description">Description</label>
@@ -32,7 +31,4 @@ add new products
 	    <button type="submit" class="btn"> Submit </button>
 	    <input type="hidden" name="_token" value="{{ Session::token() }}">
 	</form>
-
-</div>
-
 @endsection
